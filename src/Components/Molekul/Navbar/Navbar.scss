@@ -1,0 +1,111 @@
+.Nav {
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to right, rgb(183, 255, 0), rgb(255, 251, 0));
+
+    .container_Nav {
+        background-image: url("../../../Assets/image/garis_batik.png");
+        background-repeat: no-repeat;
+        background-size: 150px;
+        background-position: right;
+
+        .Brand_Nav {
+
+            .image_Nav {
+                border-radius: 200px;
+                background-image: linear-gradient(to right, rgb(253, 252, 252), rgb(244, 188, 98));
+                opacity: 0.8;
+                box-shadow: 0px 0px 5px black;
+            }
+        }
+
+        .Nav_List {
+
+            .Nav_text {
+                width: max-content;
+                font-weight: 600;
+
+                .text_Nav {
+                    background-color: white;
+                    opacity: 0.9;
+                    margin: 2px;
+                    border-radius: 10px;
+                    transition: 1s;
+                }
+
+                .text_Nav:hover {
+                    transform: scale(0.9);
+                }
+            }
+
+            .nav_Search {
+                .form_Nav {
+                    border-radius: 100px;
+                    opacity: 0.9;
+                    box-shadow: 0px 0px 5px black;
+                }
+
+                .btn_Nav {
+                    border-radius: 100px;
+                    opacity: 0.9;
+                    box-shadow: 0px 0px 5px black;
+                }
+            }
+
+
+        }
+
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .Nav {
+        .container_Nav {
+
+
+            .Nav_List {
+                .Nav_text {
+                    width: 100%;
+                    margin-right: 100px;
+
+                    .text_Nav {
+                        background-color: transparent;
+                        opacity: 0.9;
+                        margin: 2px;
+                        transition: 0.2s;
+                    }
+
+                    .text_Nav:hover {
+                        transform: scale(0.9);
+                    }
+                }
+
+                .nav_Search {
+                    .form_Nav {
+                        border-radius: 100px;
+                        opacity: 0.9;
+                        box-shadow: 0px 0px 5px black;
+                    }
+
+                    .btn_Nav {
+                        border-radius: 100px;
+                        opacity: 0.9;
+                        box-shadow: 0px 0px 5px black;
+                        font-weight: 700;
+                        color: black;
+                        font-style: italic;
+                        transition: 1s;
+                    }
+
+                    .btn_Nav:hover {
+                        font-weight: 400;
+                        color: white;
+                    }
+                }
+
+            }
+
+        }
+    }
+}
