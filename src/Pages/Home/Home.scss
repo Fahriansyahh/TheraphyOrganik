@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,300&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap');
+
+.Home_container {
+    header {
+        background-color: black;
+        border-radius: 10px;
+
+        .background_Header {
+            margin-top: 120px;
+            background-image: url(../../Assets/image/Jamu-bg.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 400px;
+            width: 100%;
+            padding: 20px;
+
+            .text_header {
+                background-image: linear-gradient(to bottom right, rgba(110, 29, 29, 0.9), rgba(251, 235, 7, 0.7));
+                margin-top: 120px;
+                width: 50%;
+                border-radius: 0px 50px;
+                padding: 10px;
+
+                span {
+                    font-family: Merriweather;
+                    font-size: 13px;
+                    color: rgb(253, 246, 246);
+                    backdrop-filter: blur(2px);
+                }
+            }
+
+            .Btn_bgc {
+                margin: 5px;
+                color: White;
+                font-weight: 400;
+                filter: blur(0px);
+                font-size: 14px;
+            }
+        }
+    }
+
+    p {
+        font-size: 14px;
+        font-family: Merriweather;
+        color: rgb(0, 0, 0);
+        font-weight: 300;
+    }
+
+    .Header_text {
+        h1 {
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 50px;
+            font-family: Lato;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    .Home_container {
+        header {
+
+            .background_Header {
+
+                .text_header {
+                    background-color: rgba(255, 255, 255, 0.7);
+                    margin-top: 80px;
+                    width: 90%;
+                    border-radius: 0px 50px;
+                    padding: 10px;
+
+                }
+
+            }
+        }
+
+        p {
+            font-size: 13px;
+            padding: 10px;
+        }
+
+        .Header_text {
+            h1 {
+                font-size: 26px;
+                text-align: center;
+                margin-bottom: 50px;
+            }
+        }
+    }
+}
