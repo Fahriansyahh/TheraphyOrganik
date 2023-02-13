@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Products.scss"
 import { Navbarr, Footer } from '../../Components'
 import Container from 'react-bootstrap/Container';
@@ -10,6 +10,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Figure from 'react-bootstrap/Figure';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import axios from 'axios';
 import {
     MDBCard,
     MDBCardImage,
@@ -23,21 +25,70 @@ const Products = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [pageNum, setPageNum] = useState()
+    const [queryPage, setQueryPage] = useState(1)
+    const [Project, setProject] = useState([])
+    const [modal, setModal] = useState()
+
+    //! set list navbar Products
+    const [width, setWidth] = useState(window.innerWidth);
+    const handleResize = () => {
+        setWidth(window.innerWidth);
+    };
+    //! tutup
+    useEffect(() => {
+        axios.get(`http://localhost:4000/Products/v1/getAll?page=${queryPage}&toPage=10`)
+            .then(res => {
+                const data = res.data
+                setPageNum(data.pageNum)
+                setProject(data.data)
+            })
+            .catch(err => console.log(err))
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [queryPage]);
+
+    let arr = []
+    for (let a = 0; a < pageNum; a++) {
+        arr.push(a + 1)
+    }
+    let paginationFunc = (page, event) => {
+        setQueryPage(page + 1)
+    }
+    const handleModal = (id) => {
+        axios.get(`http://localhost:4000/Products/v1/getByid/${id}`).then(res => {
+            const dataModal = res.data.Products.Products
+            setModal(dataModal)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
     return (
         <div className='Products_Container' >
             <Navbarr />
-            <Container style={{ marginTop: "170px" }} >
+            <Container style={{ marginTop: "170px" }}  >
                 <Row>
                     <Col xs={"12"} sm={"12"}  >
                         <>
 
                             <Navbar bg="dark" variant="dark" style={{ borderRadius: "10px" }} >
-                                <Container  >
-                                    <Nav className="me-auto" >
-                                        <Nav.Link href="#home">Jamu</Nav.Link>
-                                        <Nav.Link href="#features">Kecantikkan</Nav.Link>
-                                        <Nav.Link href="#pricing">Dlll</Nav.Link>
-                                    </Nav>
+                                <Container className='d-flex align-items-center' >
+                                    {width > 768 ? <Nav className="me-auto " >
+                                        <Nav.Link href="#pricing" className="link_products">Dlll</Nav.Link>
+                                    </Nav> : <Dropdown>
+                                        <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ borderRadius: "0px 20px 0px 20px", backgroundImage: "linear-gradient(to bottom right, green, yellow)", fontSize: "14px" }} >
+                                            Kategori
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu style={{ maxHeight: "100px", overflowY: "scroll", zIndex: "1" }} >
+                                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>}
+
                                     <Navbar.Brand href="#home"   >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-whatsapp me-2" viewBox="0 0 16 16">
                                             <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
@@ -56,239 +107,52 @@ const Products = () => {
 
                     </Col>
                 </Row>
-                <MDBRow className='row-cols-2 row-cols-sm-4  row-cols-lg-5 g-2 mt-2    d-flex justify-content-center'>
+                <MDBRow className='row-cols-2 row-cols-sm-4  row-cols-lg-5 g-2 mt-2    d-flex justify-content-center cards_Products' >
+                    {Project.map((data) => {
+                        const Products = data.Products
+                        return (
+                            <MDBCol key={data._id} >
+                                <MDBCard onClick={() => handleModal(data._id)} >
+                                    <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
 
-                    <MDBCol>
-                        <MDBCard>
+                                        <MDBCardImage
+                                            src={`http://localhost:4000/${Products.image}`}
+                                            alt='...'
+                                            position='top'
+                                        />
+                                        <MDBCardBody>
+                                            <MDBCardTitle className="card_title">{Products.Title}</MDBCardTitle>
+                                            <MDBCardText className='card_Money'>
+                                                Rp:{Products.Harga}
 
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
+                                            </MDBCardText>
+                                        </MDBCardBody>
+                                    </Button>
 
-
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol>
-                        <MDBCard>
-
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
-
-
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol>
-                        <MDBCard>
-
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
-
-
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol>
-                        <MDBCard>
-
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
-
-
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol>
-                        <MDBCard>
-
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
-
-
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol>
-                        <MDBCard>
-
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
-
-
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol>
-                        <MDBCard>
-
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
-
-
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol>
-                        <MDBCard>
-
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
-
-
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol>
-                        <MDBCard>
-
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
-
-
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol>
-                        <MDBCard>
-                            <Button variant="primary" style={{ backgroundColor: "transparent", border: "0 solid black", color: "black" }} onClick={handleShow}>
-
-                                <MDBCardImage
-                                    src='https://mdbootstrap.com/img/new/standard/city/042.webp'
-                                    alt='...'
-                                    position='top'
-                                />
-                                <MDBCardBody>
-                                    <MDBCardTitle>Card title</MDBCardTitle>
-                                    <MDBCardText>
-                                        rp:0000
-
-                                    </MDBCardText>
-                                </MDBCardBody>
-                            </Button>
-
-                        </MDBCard>
-                    </MDBCol>
+                                </MDBCard>
+                            </MDBCol>)
+                    })}
                 </MDBRow>
                 <Row>
                     <Col xs={"12"} sm={"12"} className="d-flex justify-content-center mt-5" >
+
                         <nav aria-label='...'>
                             <MDBPagination circle className='mb-0'  >
                                 <MDBPaginationItem >
-                                    <MDBPaginationLink href='#' tabIndex={-1} aria-disabled='true' className='m-0 p-1' style={{ fontSize: "13px" }}>
+                                    <MDBPaginationLink href='#' tabIndex={-1} aria-disabled='true' className='m-0 p-1' style={{ fontSize: "13px" }} onClick={() => { setQueryPage(queryPage === 1 ? queryPage : queryPage - 1) }}  >
                                         Previous
                                     </MDBPaginationLink>
                                 </MDBPaginationItem>
+                                {arr.map((page, index) => {
+                                    return (
+                                        <MDBPaginationItem key={page} >
+                                            <MDBPaginationLink href='#' className='m-0 p-1' style={{ fontSize: "13px" }} onClick={() => { paginationFunc(index) }} >{page}</MDBPaginationLink>
+                                        </MDBPaginationItem>
+                                    )
+                                })}
+
                                 <MDBPaginationItem>
-                                    <MDBPaginationLink href='#' className='m-0 p-1' style={{ fontSize: "13px" }}>1</MDBPaginationLink>
-                                </MDBPaginationItem>
-                                <MDBPaginationItem active>
-                                    <MDBPaginationLink href='#' className='m-0 p-1' style={{ fontSize: "13px" }}>
-                                        2 <span className='visually-hidden'>(current)</span>
-                                    </MDBPaginationLink>
-                                </MDBPaginationItem>
-                                <MDBPaginationItem>
-                                    <MDBPaginationLink href='#' className='m-0 p-1' style={{ fontSize: "13px" }}>3</MDBPaginationLink>
-                                </MDBPaginationItem>
-                                <MDBPaginationItem>
-                                    <MDBPaginationLink href='#' className='m-0 p-1' style={{ fontSize: "13px" }}>Next</MDBPaginationLink>
+                                    <MDBPaginationLink href='#' className='m-0 p-1' style={{ fontSize: "13px" }} onClick={() => { setQueryPage(queryPage === arr.unshift() ? queryPage : queryPage + 1) }} >Next</MDBPaginationLink>
                                 </MDBPaginationItem>
                             </MDBPagination>
                         </nav>
@@ -297,48 +161,52 @@ const Products = () => {
             </Container>
             <Footer />
             {/* modal */}
-            <Modal show={show}
-                centered
-                onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <div className='body_modal d-flex justify-content-center align-items-center'>
-                        <Figure>
-                            <Figure.Image
-                                width={200}
-                                height={{ maxWidth: "250px" }}
-                                alt="171x180"
-                                src="https://mdbootstrap.com/img/new/standard/city/042.webp"
-                            />
-                        </Figure>
-                        <div className='m-2 ' >
-                            <div style={{ overflow: "auto", width: "200px", height: "100px", wordWrap: "break-word", fontSize: "12px", direction: "rtl" }} className="p-2 mb-2 text-start"><p>
-                                Penjelasan Lengkap klik link https://therapyOrganik/Tentang/....
-                                asdjksadjksasasdasdasdasdasdjksadjksasasdasdasdasdasdjksadjksasasdasdasdasdasdjksadjksajksadjksahdjashdjkashdjksahdjksahdjksahdjskahdjsakdhjksaandjkasdasdasdsa</p></div>
-                            <div >
-                                <ListGroup style={{ fontSize: "12px", margin: "0", padding: "0", heigth: "50px", width: "200px" }} >
-                                    <ListGroup.Item style={{ padding: "1px", width: "100px", boxShadow: "0px 0px 5px black" }} className="text-center" >Stock : 20</ListGroup.Item>
-                                    <ListGroup.Item style={{ margin: "0 100px", padding: "1px", width: "100px", boxShadow: "0px 0px 5px black" }} className="text-center">Rp:2000</ListGroup.Item>
-                                </ListGroup>
+            {!modal ? undefined :
+                <Modal show={show}
+                    centered
+                    onHide={handleClose} >
+                    <Modal.Header closeButton style={{ backgroundImage: "linear-gradient(to bottom right, yellow,green)" }}>
+                        <Modal.Title id="contained-modal-title-vcenter " className="modal_Title text-center" style={{ fontSize: "24px", marginLeft: "45%", color: "white" }}>{modal.Title}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className='body_modal d-flex justify-content-center align-items-center'>
+                            <Figure>
+                                <Figure.Image
+                                    width={200}
+                                    height={{ maxWidth: "250px" }}
+                                    alt="171x180"
+                                    src={`http://localhost:4000/${modal.image}`}
+                                />
+                            </Figure>
+                            <div className='m-2 ' >
+                                <div style={{ overflow: "auto", width: "200px", height: "100px", wordWrap: "break-word", fontSize: "12px", direction: "rtl" }} className="p-2 mb-2 text-start"><p>
+                                    {modal.Keterangan}
+                                </p></div>
+                                <div >
+                                    <ListGroup style={{ fontSize: "12px", margin: "0", padding: "0", heigth: "50px", width: "200px" }} >
+                                        <ListGroup.Item style={{ padding: "1px", width: "100px", boxShadow: "0px 0px 5px black" }} className="text-center" >Stock : {modal.Stock}</ListGroup.Item>
+                                        <ListGroup.Item style={{ margin: "0 100px", padding: "1px", width: "100px", boxShadow: "0px 0px 5px black" }} className="text-center">Rp: {modal.Harga}</ListGroup.Item>
+                                    </ListGroup>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Shoope
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bag-fill ms-2" viewBox="0 0 16 16">
-                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
-                        </svg>
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                    </Modal.Body>
+                    <Modal.Footer className="modal_footer" >
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" href={modal.Link} style={{
+                            border: "1px solid orange", background: "linear-gradient(to right, #ee4d2d, #ff7337)",
+                        }}>
+                            Shoope
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bag-fill ms-2" viewBox="0 0 16 16">
+                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
+                            </svg>
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            }
         </div >
     )
 }

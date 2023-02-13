@@ -1,2 +1,3 @@
 import Index from "./Router";
-export { Index }
+import store from "./Redux";
+export { Index, store }

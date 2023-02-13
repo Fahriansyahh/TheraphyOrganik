@@ -9,8 +9,12 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import "./Home.scss"
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
 const Home = () => {
     const history = useNavigate()
+    const { Global } = useSelector(state => state.Global)
+    const dispatch = useDispatch()
+
     useEffect(() => {
         gsap.set('.text_header', {
             duration: 0, y: -110, opacity: 0
@@ -26,7 +30,9 @@ const Home = () => {
         });
 
         AOS.init();
-    }, []);
+        dispatch({ type: "Global", payload: "asdasdasda" })
+        console.log(Global)
+    }, [dispatch, Global]);
     return (
         <div className='Home_container'>
             <Navbarr />
