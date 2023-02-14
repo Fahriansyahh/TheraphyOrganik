@@ -11,7 +11,9 @@ import Modal from 'react-bootstrap/Modal';
 import Figure from 'react-bootstrap/Figure';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
-import axios from 'axios';
+import { CreateModal } from '../../Components';
+// import axios from 'axios';
+import { ApiProductsGetQuery, ApiProductsGetId, ApiKategory, ApiKategoryGet } from "../../Config/Redux/Action/Products"
 import {
     MDBCard,
     MDBCardImage,
@@ -29,7 +31,8 @@ const Products = () => {
     const [queryPage, setQueryPage] = useState(1)
     const [Project, setProject] = useState([])
     const [modal, setModal] = useState()
-
+    const [kategory, setKategory] = useState([])
+    const [KategoryId, setKategoryId] = useState()
     //! set list navbar Products
     const [width, setWidth] = useState(window.innerWidth);
     const handleResize = () => {
@@ -37,18 +40,20 @@ const Products = () => {
     };
     //! tutup
     useEffect(() => {
-        axios.get(`http://localhost:4000/Products/v1/getAll?page=${queryPage}&toPage=10`)
-            .then(res => {
-                const data = res.data
-                setPageNum(data.pageNum)
-                setProject(data.data)
-            })
-            .catch(err => console.log(err))
+        //!get Api Footer kateorgy
+        KategoryId ? ApiKategoryGet(KategoryId, queryPage, setPageNum, setProject) : ApiProductsGetQuery(queryPage, setPageNum, setProject)
+
+        //!tutup
+        //! get Api Footer Kategory
+        ApiKategory(setKategory)
+        //! tutup
+        //!set layar footer Products
         window.addEventListener("resize", handleResize);
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, [queryPage]);
+        //!tutup
+    }, [queryPage, KategoryId]);
 
     let arr = []
     for (let a = 0; a < pageNum; a++) {
@@ -58,17 +63,18 @@ const Products = () => {
         setQueryPage(page + 1)
     }
     const handleModal = (id) => {
-        axios.get(`http://localhost:4000/Products/v1/getByid/${id}`).then(res => {
-            const dataModal = res.data.Products.Products
-            setModal(dataModal)
-        }).catch(err => {
-            console.log(err)
-        })
+        //!getApi berdasarkan id
+        ApiProductsGetId(id, setModal)
+    }
+    const handleKategory = (data) => {
+        setKategoryId(data)
+        setQueryPage(1)
     }
     return (
         <div className='Products_Container' >
             <Navbarr />
             <Container style={{ marginTop: "170px" }}  >
+
                 <Row>
                     <Col xs={"12"} sm={"12"}  >
                         <>
@@ -76,16 +82,28 @@ const Products = () => {
                             <Navbar bg="dark" variant="dark" style={{ borderRadius: "10px" }} >
                                 <Container className='d-flex align-items-center' >
                                     {width > 768 ? <Nav className="me-auto " >
-                                        <Nav.Link href="#pricing" className="link_products">Dlll</Nav.Link>
+                                        {kategory.map(data => {
+                                            const formattedString = data.charAt(0).toUpperCase() + data.slice(1).toLowerCase();
+                                            return (
+                                                <Nav.Link key={data} href="#pricing" className="link_products" onClick={() => { handleKategory(data) }} >{formattedString}</Nav.Link>
+                                            )
+                                        })}
+                                        <Nav.Link href="#pricing" className="link_products" onClick={() => { setKategoryId("") }} >All</Nav.Link>
                                     </Nav> : <Dropdown>
                                         <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ borderRadius: "0px 20px 0px 20px", backgroundImage: "linear-gradient(to bottom right, green, yellow)", fontSize: "14px" }} >
                                             Kategori
                                         </Dropdown.Toggle>
 
                                         <Dropdown.Menu style={{ maxHeight: "100px", overflowY: "scroll", zIndex: "1" }} >
-                                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                            <Dropdown.Item eventKey="4" onClick={() => { setKategoryId("") }}>All</Dropdown.Item>
+                                            <Dropdown.Divider />
+                                            {kategory.map((data) => {
+                                                const formattedString = data.charAt(0).toUpperCase() + data.slice(1).toLowerCase();
+                                                return (
+                                                    <Dropdown.Item key={data} href="#/action-1" onClick={() => { handleKategory(data) }}>{formattedString}</Dropdown.Item>
+                                                )
+                                            })}
+
                                         </Dropdown.Menu>
                                     </Dropdown>}
 
@@ -105,6 +123,11 @@ const Products = () => {
                             </Navbar>
                         </>
 
+                    </Col>
+                </Row>
+                <Row className="m-2" >
+                    <Col xs={"12"} sm={"12"} className="d-flex justify-content-end"  >
+                        <CreateModal />
                     </Col>
                 </Row>
                 <MDBRow className='row-cols-2 row-cols-sm-4  row-cols-lg-5 g-2 mt-2    d-flex justify-content-center cards_Products' >
