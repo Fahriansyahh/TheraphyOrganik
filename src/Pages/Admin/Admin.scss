@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap');
+
+.container_Admin {
+
+    .text_admin {
+        font-family: Roboto;
+
+    }
+
+    .Admin_image {
+        border-radius: 200px;
+        background-image: linear-gradient(to right, rgb(253, 252, 252), rgb(244, 188, 98));
+        opacity: 0.8;
+        box-shadow: 0px 0px 5px black;
+        margin-bottom: 20px;
+    }
+}

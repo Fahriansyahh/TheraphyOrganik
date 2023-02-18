@@ -7,9 +7,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Logo from "../../../Assets/image/Therapy_Organic.png"
+import { useNavigate } from 'react-router-dom';
 const Navbarr = () => {
     const [Scroll, setScroll] = useState("")
-
+    const history = useNavigate()
     const navScroll = () => {
         Scroll ? setScroll("") : setScroll("d-flex")
     }
@@ -32,7 +33,9 @@ const Navbarr = () => {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link className='text_Nav' href="#action1">Home</Nav.Link>
+                        <Nav.Link className='text_Nav' onClick={() => {
+                            history("/")
+                        }} >Home</Nav.Link>
                         <Nav.Link className='text_Nav' href="#action2">About</Nav.Link>
                         <NavDropdown className='text_Nav' title="Tentang" id="navbarScrollingDropdown">
                             <NavDropdown.Item className='text_Nav' href="#action3">Tentang</NavDropdown.Item>
@@ -47,11 +50,16 @@ const Navbarr = () => {
                         <Nav.Link className='text_Nav' href="#"  >
                             Contact
                         </Nav.Link>
-                        <Nav.Link className='text_Nav' href="#"  >
+                        <Nav.Link className='text_Nav' onClick={() => {
+                            history("/Products")
+                        }}  >
                             Products
                         </Nav.Link>
                         <Nav.Link className='text_Nav' href="#"  >
                             Theraphy
+                        </Nav.Link>
+                        <Nav.Link className='text_Nav' href="#"  >
+                            Admin
                         </Nav.Link>
 
                     </Nav>

@@ -42,7 +42,7 @@ const Home = () => {
                         <Row className='text-center d-flex  flex-column justify-content-center align-items-center '>
                             <Col xs={"12"} sm={"12"} className="mb-2 text_header" ><span>Sesuaikan pilihan Anda sesuai dengan kebutuhan. Tombol 'Products' akan membawamu ke produk-produk jamu dan alat kecantikan kami, sedangkan tombol 'Terapi Organik' akan membawamu ke jasa kami. </span></Col>
                             <Col xs={"12"} sm={"12"} style={{ width: "300px", margin: "0px auto", backdropBlur: "2px", backdropFilter: "blur(2px)", borderRadius: "10px", zIndex: "1", }}>
-                                <Button variant="outline-primary Btn_bgc" >Theraphy_Organik</Button>{' '}
+                                <Button variant="outline-primary Btn_bgc" >Theraphy_Organic</Button>{' '}
                                 <Button variant="outline-primary Btn_bgc" onClick={() => { history("/Products") }}>Products</Button>{' '}
                             </Col>
                         </Row>
@@ -56,7 +56,7 @@ const Home = () => {
                 <Row>
                     <Col xs={"12"} sm={"12"}>
                         <div className='Header_text'>
-                            <h1 style={{ marginTop: "100px" }} >Teraphy_Organik</h1>
+                            <h1 style={{ marginTop: "100px" }} >Theraphy_Organic</h1>
                         </div>
                     </Col>
 
