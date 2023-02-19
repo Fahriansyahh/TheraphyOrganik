@@ -58,7 +58,9 @@ const Navbarr = () => {
                         <Nav.Link className='text_Nav' href="#"  >
                             Theraphy
                         </Nav.Link>
-                        <Nav.Link className='text_Nav' href="#"  >
+                        <Nav.Link className='text_Nav' onClick={() => {
+                            history("/Admin")
+                        }} >
                             Admin
                         </Nav.Link>
 

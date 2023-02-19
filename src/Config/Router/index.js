@@ -1,13 +1,18 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Home, Products, Admin } from '../../Pages'
+import { Home, Products, Admin, Theraphy } from '../../Pages'
+import AdminRoutes from './Admin/Admin'
 const Index = () => {
     return (
         <BrowserRouter >
             <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/Products' element={<Products />} />
-                <Route path='/Admin' element={<Admin />} />
+                <Route>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/Products' element={<Products />} />
+                    <Route path='/Admin' element={<Admin />} />
+                    <Route path='/Theraphy' element={<Theraphy />} />
+                    <Route path='*' element={<AdminRoutes />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     )

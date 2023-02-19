@@ -7,7 +7,6 @@ import axios from 'axios';
 const UpdateModal = (dataOld) => {
     const OldData = dataOld.dataOld
     const Products = OldData.Products
-    console.log(Products.image)
     const [show, setShow] = useState(false);
     const [image, setImage] = useState()
     const [imageUrl, setImageUrl] = useState()
@@ -54,7 +53,6 @@ const UpdateModal = (dataOld) => {
         setImage(a)
         setImageUrl(URL.createObjectURL(a))
     }
-    console.log(Error)
     return (
         <>
             <Button variant="success" style={{ backgroundImage: "linear-gradient(to bottom right,blue, yellow)", fontWeight: "600" }} onClick={handleShow}>
