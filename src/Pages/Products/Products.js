@@ -93,7 +93,7 @@ const Products = () => {
         return (
             <div className='Products_Container' >
                 <Navbarr />
-                <Container style={{ marginTop: "170px" }}  >
+                <Container style={{ marginTop: "20px" }}  >
 
                     <Row>
                         <Col xs={"12"} sm={"12"}  >
@@ -157,7 +157,7 @@ const Products = () => {
                             const int = index + 1
                             return (
                                 <MDBCol key={data._id} >
-                                    <MDBCard onClick={() => handleModal(data._id)} data-aos={width < 576 ? (int % 2 === 0 ? "flip-left" : "flip-up") : "flip-left"} >
+                                    <MDBCard onClick={() => handleModal(data._id)} data-aos={width < 576 ? (int % 2 === 0 ? "flip-  " : "flip-up") : "flip-left"} >
                                         {/* close button */}
                                         {Random ? <OverlayTrigger
                                             key={'top'}

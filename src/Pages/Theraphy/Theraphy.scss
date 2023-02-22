@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap');
+
+.container_Theraphy {
+    .Theraphy_About {
+        font-family: Roboto;
+
+        button {
+            border: 0px solid white;
+            transition: 0.4s;
+            margin: 0px 10px;
+            box-shadow: 0px 0px 5px black;
+
+
+        }
+
+
+
+        button:hover {
+            box-shadow: 0px 4px 5px black;
+            transform: scale(1.2);
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        h1 {
+            font-family: Lato;
+            font-size: 1.8rem;
+        }
+    }
+
+    .list_theraphy {
+
+
+        font-family: Roboto;
+
+        h3 {
+            font-family: Lato;
+            font-size: 1.4rem;
+        }
+
+        .listGroup_theraphy {
+            box-shadow: -0px 0px 4px black;
+            border-radius: 10px;
+
+            h5 {
+                font-size: 1rem;
+            }
+
+            p {
+                font-size: 0.8rem;
+            }
+
+            a {
+                font-size: 0.8rem;
+
+            }
+        }
+    }
+}

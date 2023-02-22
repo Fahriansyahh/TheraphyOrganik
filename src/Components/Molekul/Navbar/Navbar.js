@@ -15,7 +15,7 @@ const Navbarr = () => {
         Scroll ? setScroll("") : setScroll("d-flex")
     }
     return (
-        <Navbar bg="light" expand="md" className='Nav position-fixed'>
+        <Navbar bg="light" expand="md" className='Nav'>
             <Container fluid className='container_Nav' >
                 <Navbar.Brand href="#home" className='Brand_Nav'>
                     <img
