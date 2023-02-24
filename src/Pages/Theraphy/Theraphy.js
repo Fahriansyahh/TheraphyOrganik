@@ -42,7 +42,7 @@ const Theraphy = () => {
     return (
         <div >
             <Navbarr />
-            <Container className='container_Theraphy' >
+            <Container className='container_Theraphy mb-5' >
                 <Row className="d-flex justify-content-center Theraphy_About">
                     <Col xs={"12"} sm={"12"} >
                         <h1 className="text-center mt-4 mb-3 header" >Theraphy Organik</h1>

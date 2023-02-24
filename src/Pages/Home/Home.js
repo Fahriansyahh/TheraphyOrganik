@@ -56,7 +56,8 @@ const Home = () => {
                     </div>
                 </header >
                 <Container style={{
-                    width: "100%"
+                    width: "100%",
+                    marginBottom: "100px"
                 }} >
 
                     <Row>

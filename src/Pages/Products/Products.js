@@ -93,7 +93,7 @@ const Products = () => {
         return (
             <div className='Products_Container' >
                 <Navbarr />
-                <Container style={{ marginTop: "20px" }}  >
+                <Container style={{ marginTop: "20px", marginBottom: "100px" }}  >
 
                     <Row>
                         <Col xs={"12"} sm={"12"}  >
