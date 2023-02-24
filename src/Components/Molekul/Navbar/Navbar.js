@@ -55,7 +55,9 @@ const Navbarr = () => {
                         }}  >
                             Products
                         </Nav.Link>
-                        <Nav.Link className='text_Nav' href="#"  >
+                        <Nav.Link className='text_Nav' onClick={() => {
+                            history("/Theraphy")
+                        }} >
                             Theraphy
                         </Nav.Link>
                         <Nav.Link className='text_Nav' onClick={() => {
