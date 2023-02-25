@@ -10,12 +10,41 @@ import Button from 'react-bootstrap/Button';
 import "./Home.scss"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-
+import Herbal from "../../Assets/image/Herbal.jpg"
+import { motion } from "framer-motion";
 const Home = () => {
     const history = useNavigate()
     const { Global } = useSelector(state => state.Global)
     const dispatch = useDispatch()
 
+    const textVariants = {
+        hidden: {
+            opacity: 0,
+            y: 50,
+        },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: 0.5,
+                staggerChildren: 0.1,
+            },
+        },
+    };
+
+    const letterVariants = {
+        hidden: {
+            opacity: 0,
+            y: 20,
+        },
+        visible: {
+            opacity: 1,
+            y: 0,
+        },
+    };
+    const textAnimate = "Sesuaikan pilihan Anda sesuai dengan Keinginan Anda. Tombol 'Products' akan membawamu ke produk-produk jamu dan alat kecantikan kami, sedangkan tombol 'Terapi Organik' akan membawamu ke jasa kami.";
+
+    const textArray = textAnimate.split("");
     useEffect(() => {
         gsap.set('.text_header', {
             duration: 0, y: -110, opacity: 0
@@ -46,7 +75,18 @@ const Home = () => {
                     <div className='background_Header  '>
                         <Container >
                             <Row className='text-center d-flex  flex-column justify-content-center align-items-center '>
-                                <Col xs={"12"} sm={"12"} className="mb-2 text_header" ><span>Sesuaikan pilihan Anda sesuai dengan Keinginan Anda. Tombol 'Products' akan membawamu ke produk-produk jamu dan alat kecantikan kami, sedangkan tombol 'Terapi Organik' akan membawamu ke jasa kami. </span></Col>
+                                <Col xs={"12"} sm={"12"} className="mb-2 text_header" >
+                                    <motion.span
+                                        variants={textVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                    >
+                                        {textArray.map((text, index) => {
+                                            return (<motion.span key={index + "-text"} variants={letterVariants}>{text}</motion.span>)
+                                        })}
+
+                                    </motion.span>
+                                </Col>
                                 <Col xs={"12"} sm={"12"} style={{ width: "300px", margin: "0px auto", backdropBlur: "2px", backdropFilter: "blur(2px)", borderRadius: "10px", zIndex: "1", }}>
                                     <Button variant="outline-primary Btn_bgc" onClick={() => history("/Theraphy")}>Theraphy_Organic</Button>{' '}
                                     <Button variant="outline-primary Btn_bgc" onClick={() => { history("/Products") }}>Products</Button>{' '}
@@ -91,6 +131,27 @@ const Home = () => {
                                 </p>
                             </div>
                         </Col>
+                    </Row>
+                    <Row className='mt-5 HerbalProducts' >
+                        <Col xs="12" sm="12" lg="7" >
+                            <img src={Herbal} alt={"herbal"} width="100%">
+                            </img>
+                        </Col>
+                        <div data-aos="fade-right" className=' AnimateHerbal d-flex  flex-column justify-content-center align-items-center '
+                        >
+                            <p className='m-auto' >100 % herbal</p>
+                        </div>
+
+                        <Col xs="12" sm="12" lg="5" className="m-auto"  >
+                            <h3 className='mt-5' data-aos="zoom-in-down"  >Products</h3>
+                            <p data-aos="fade-up"
+                                data-aos-anchor-placement="bottom-bottom" data-aos-offset="0">What is Lorem Ipsum?
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+
+
+                            </p></Col>
+
                     </Row>
                 </Container >
                 <Footer />

@@ -9,6 +9,7 @@ import Logo from "../../Assets/image/Therapy_Organic.png"
 import Alert from 'react-bootstrap/Alert';
 import "./Admin.scss"
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion"
 const Admin = () => {
     const history = useNavigate()
     const [Username, setUsername] = useState()
@@ -57,8 +58,18 @@ const Admin = () => {
                         {error ? <Alert variant="danger">
                             {error}
                         </Alert> : false}
-
-                        <img src={Logo} alt="logo" width={"150rem"} className=" Admin_image " ></img>
+                        <motion.div
+                            className="container d-flex justify-content-center"
+                            initial={{ scale: 0 }}
+                            animate={{ rotate: 0, scale: 1 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 280,
+                                damping: 20
+                            }}
+                        >
+                            <img src={Logo} alt="logo" width={"150rem"} className=" Admin_image " ></img>
+                        </motion.div>
 
                         <Form.Group as={Row} className="mb-2 d-flex  align-items-center  " controlId="formPlaintextPassword" style={{ width: "100%" }}  >
                             <Form.Label column sm="2" className="ms-1  text_admin"  >

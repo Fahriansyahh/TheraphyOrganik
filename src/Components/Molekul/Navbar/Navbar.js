@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Logo from "../../../Assets/image/Therapy_Organic.png"
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion"
 const Navbarr = () => {
     const [Scroll, setScroll] = useState("")
     const history = useNavigate()
@@ -18,14 +19,33 @@ const Navbarr = () => {
         <Navbar bg="light" expand="md" className='Nav'>
             <Container fluid className='container_Nav' >
                 <Navbar.Brand href="#home" className='Brand_Nav'>
-                    <img
-                        src={Logo}
-                        width="100"
-                        className="d-inline-block align-top image_Nav mb-5"
-                        alt="Therapy Organik"
-                    />
+                    <motion.div
+                        className="container"
+                        initial={{ scale: 0 }}
+                        animate={{ rotate: 0, scale: 1 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 280,
+                            damping: 20
+                        }}
+
+                    >
+                        <img
+                            src={Logo}
+                            width="100"
+                            className="d-inline-block align-top image_Nav mb-5"
+                            alt="Therapy Organik"
+                        />
+                    </motion.div>
+
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll" style={{ boxShadow: "0px 0px 5px black" }} onClick={() => { navScroll() }} />
+                <motion.div
+                    whileTap={{ scale: 1, rotate: 10 }}
+
+                >
+                    <Navbar.Toggle aria-controls="navbarScroll" style={{ boxShadow: "0px 0px 5px black" }} onClick={() => { navScroll() }} />
+                </motion.div>
+
 
                 <Navbar.Collapse id="navbarScroll" className={`${Scroll} p-1 Nav_List  justify-content-md-start flex-column-reverse bd-highlight mt-sm-0 mt-md-5  `} >
                     <Nav
