@@ -9,14 +9,15 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Logo from "../../../Assets/image/Therapy_Organic.png"
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion"
-const Navbarr = () => {
+const Navbarr = (position) => {
+    const position_ = position.position ? position.position : "static-top"
     const [Scroll, setScroll] = useState("")
     const history = useNavigate()
     const navScroll = () => {
         Scroll ? setScroll("") : setScroll("d-flex")
     }
     return (
-        <Navbar bg="light" expand="md" className='Nav'>
+        <Navbar bg="light" expand="md" className={`Nav ${position_}`} >
             <Container fluid className='container_Nav' >
                 <Navbar.Brand href="#home" className='Brand_Nav'>
                     <motion.div
