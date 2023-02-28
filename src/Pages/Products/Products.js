@@ -157,7 +157,7 @@ const Products = () => {
                             const int = index + 1
                             return (
                                 <MDBCol key={data._id} >
-                                    <MDBCard onClick={() => handleModal(data._id)} data-aos={width < 576 ? (int % 2 === 0 ? "flip-  " : "flip-up") : "flip-left"} >
+                                    <MDBCard onClick={() => handleModal(data._id)} data-aos={width < 576 ? (int % 2 === 0 ? "flip-left" : "flip-up") : "flip-left"} >
                                         {/* close button */}
                                         {Random ? <OverlayTrigger
                                             key={'top'}

@@ -18,7 +18,7 @@ const Pesan = () => {
         setValidated(true);
     };
     return (
-        <Row className='d-flex justify-content-center align-items-sm-center mt-3 Order_contain' >
+        <Row className='d-flex justify-content-center align-items-sm-center mt-3 Order_contain ' >
             <Col xs={"12"} sm={"8"}  >
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <Row className="mb-3">
