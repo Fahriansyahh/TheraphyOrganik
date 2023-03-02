@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Footer, Navbarr, Pesan, SignUp, SignIn } from '../../Components'
+import { CanvasUser } from '../../Components/Atom/Atom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import "./Order.scss"
-import logoUser from "../../Assets/image/LogoUser.png"
 const Order = () => {
     const [first, setFirst] = useState(true)
     const [home, setHome] = useState(false)
@@ -84,25 +84,8 @@ const Order = () => {
                                             </Nav.Link>
                                         </Nav>
                                     </Col>
-                                    <Col sm={"4"} xs={"2"} className="my-auto" >
-                                        <Nav className="me-auto d-flex justify-content-end" >
 
-                                            <Nav.Link className="d-flex justify-content-end flex-wrap  flex-sm-column"  >
-                                                <Navbar.Brand className='mx-auto ' style={{ backgroundColor: "white", padding: "2px 5px", borderRadius: "50%" }} >
-                                                    <img
-                                                        src={logoUser}
-                                                        width="30"
-                                                        height="30"
-                                                        className="d-inline-block align-top m-auto"
-                                                        alt="?"
-                                                    />
-
-                                                </Navbar.Brand>
-                                                <h6 className="pt-1 mx-auto" >Fahri</h6>
-                                            </Nav.Link>
-
-                                        </Nav>
-                                    </Col>
+                                    <CanvasUser />
                                 </Row>
                             </Container>
                         </Navbar>
