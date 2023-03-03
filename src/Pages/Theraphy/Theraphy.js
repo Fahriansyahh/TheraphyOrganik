@@ -9,9 +9,36 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Accordion from 'react-bootstrap/Accordion';
 import { gsap } from 'gsap';
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
+
 
 const Theraphy = () => {
     const history = useNavigate()
+    const textVariants = {
+        hidden: {
+            opacity: 0,
+            y: 50,
+        },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: 0.5,
+                staggerChildren: 0.1,
+            },
+        },
+    };
+
+    const letterVariants = {
+        hidden: {
+            opacity: 0,
+            y: 20,
+        },
+        visible: {
+            opacity: 1,
+            y: 0,
+        },
+    };
     useEffect(() => {
         gsap.set('.header', {
             duration: 0, y: -110, opacity: 0
@@ -39,21 +66,29 @@ const Theraphy = () => {
             duration: 0.5, x: 0, opacity: 1
         });
     })
+    const textAnimate = "Theraphy Organic";
+    const textArray = textAnimate.split("");
     return (
         <div >
             <Navbarr />
             <Container className='container_Theraphy mb-5' >
-                <Row className="d-flex justify-content-center Theraphy_About">
-                    <Col xs={"12"} sm={"12"} >
-                        <h1 className="text-center mt-4 mb-3 header" >Theraphy Organik</h1>
+                <Row className=" Theraphy_About d-flex align-items-center mt-5">
+                    <Col xs={"12"} sm={"6"}  >
+                        <motion.h1
+                            variants={textVariants}
+                            initial="hidden"
+                            animate="visible"
+                            className=" mt-4 mb-3 header"
+                        >
+                            {textArray.map((text, index) => {
+                                return (<motion.span key={index + "-text"} variants={letterVariants}>{text}</motion.span>)
+                            })}
+
+
+                        </motion.h1>
                     </Col>
-                    <Col xs={"12"} sm={"6"} className="mb-2 px-3 p1" >
-                        <p>
-                            m Ipsum?
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                        </p>
-                    </Col>
-                    <Col xs={"12"} sm={"6"} className="px-3 p2" >
+
+                    <Col xs={"12"} sm={"6"} className="px-3 p2 mt-5" >
                         <p>
                             m Ipsum?
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passagesadsadsadsa asdsadasdasdasdsadas

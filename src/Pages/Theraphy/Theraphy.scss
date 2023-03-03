@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Nanum+Brush+Script&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap');
 
 .container_Theraphy {
     .Theraphy_About {
@@ -27,9 +26,23 @@
         }
 
         h1 {
-            font-family: Lato;
-            font-size: 1.8rem;
+            font-family: Dancing Script;
+            font-size: 120px;
+            font-weight: bold;
+
+            span:nth-child(even) {
+                background: -webkit-linear-gradient(right, green, yellow);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            span:nth-child(odd) {
+                background: -webkit-linear-gradient(left, green, yellow);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
         }
+
     }
 
     .list_theraphy {
@@ -59,5 +72,41 @@
 
             }
         }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .container_Theraphy {
+        .Theraphy_About {
+            h1 {
+                text-align: center;
+                font-family: Dancing Script;
+                font-size: 80px;
+                font-weight: bold;
+
+
+            }
+
+        }
+
+
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .container_Theraphy {
+        .Theraphy_About {
+            h1 {
+                text-align: center;
+                font-family: Dancing Script;
+                font-size: 90px;
+                font-weight: bold;
+
+
+            }
+
+        }
+
+
     }
 }

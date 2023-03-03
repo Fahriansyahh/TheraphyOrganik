@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Footer, Navbarr, Pesan, SignUp, SignIn } from '../../Components'
 import { CanvasUser } from '../../Components/Atom/Atom';
 import Container from 'react-bootstrap/Container';
@@ -7,11 +7,16 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import "./Order.scss"
+import Overlay from 'react-bootstrap/Overlay';
+import Tooltip from 'react-bootstrap/Tooltip';
 const Order = () => {
     const [first, setFirst] = useState(true)
     const [home, setHome] = useState(false)
     const [signIn, setSignIn] = useState(false)
     const [signUp, setSignUp] = useState(false)
+    const [show, setShow] = useState(false);
+    const target = useRef(null);
+
 
     const pilihan = (seting) => {
         console.log(seting)
@@ -30,6 +35,9 @@ const Order = () => {
             setSignIn(false)
             setSignUp(true)
         }
+        if ("pesanan" === seting) {
+            setShow(!show)
+        }
         setFirst(false)
     }
     return (
@@ -40,7 +48,7 @@ const Order = () => {
                     <Col xs={"12"} sm={"12"} className="Col_Order" >
                         <Navbar bg="dark" variant="dark" className="mt-2 " style={{ borderRadius: "10px", boxShadow: "0px 0px 3px black" }} >
                             <Container  >
-                                <Row style={{ width: "100%" }} >
+                                <Row style={{ width: "100%" }}  >
                                     <Col sm={"8"} xs={"10"} className="d-flex align-items-center" >
                                         <Nav className=" d-flex flex-wrap  " >
                                             <Nav.Link onClick={() => {
@@ -51,12 +59,20 @@ const Order = () => {
                                                 </svg>
                                             </Nav.Link>
 
-                                            <Nav.Link >
+                                            <Nav.Link ref={target} onClick={() => {
+                                                pilihan("pesanan")
+                                            }}  >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" className="bi bi-box2" viewBox="0 0 16 16">
                                                     <path d="M2.95.4a1 1 0 0 1 .8-.4h8.5a1 1 0 0 1 .8.4l2.85 3.8a.5.5 0 0 1 .1.3V15a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4.5a.5.5 0 0 1 .1-.3L2.95.4ZM7.5 1H3.75L1.5 4h6V1Zm1 0v3h6l-2.25-3H8.5ZM15 5H1v10h14V5Z" />
                                                 </svg>
                                             </Nav.Link>
-
+                                            <Overlay target={target.current} show={show} placement="top">
+                                                {(props) => (
+                                                    <Tooltip id="overlay-example" {...props}>
+                                                        Pesanan
+                                                    </Tooltip>
+                                                )}
+                                            </Overlay>
                                             <Nav.Link className='d-flex flex-column ' style={{ fontSize: "9px", textAlign: "center" }} onClick={() => {
                                                 pilihan("SignIn")
                                             }} >
