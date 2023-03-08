@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,10 +10,11 @@ import Accordion from 'react-bootstrap/Accordion';
 import { gsap } from 'gsap';
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
-
-
+import { GetAllToApiList } from '../../Config/Redux/Action/ListTheraphy';
 const Theraphy = () => {
     const history = useNavigate()
+    const [ListToApi, setListToApi] = useState([])
+    console.log(ListToApi)
     const textVariants = {
         hidden: {
             opacity: 0,
@@ -65,7 +66,9 @@ const Theraphy = () => {
         gsap.to('.btn', {
             duration: 0.5, x: 0, opacity: 1
         });
-    })
+        GetAllToApiList(setListToApi)
+
+    }, [setListToApi])
     const textAnimate = "Theraphy Organic";
     const textArray = textAnimate.split("");
     return (
@@ -104,67 +107,26 @@ const Theraphy = () => {
                     </Col>
                     <Col xs={"12"} sm={"8"} className=" p-0 mt-2 mx-auto listGroup_theraphy"  >
                         <ListGroup style={{ height: "200px", overflow: "auto" }} >
-                            <ListGroup.Item className='m-0 p-0' style={{ height: "max-content" }} >
-                                <Accordion style={{ width: "100%" }} >
-                                    <Accordion.Item eventKey="0" style={{ border: "0px solid black" }} >
-                                        <Accordion.Header><h5  >asdsadasdas</h5></Accordion.Header>
-                                        <Accordion.Body >
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation  ullamco laboris nisi ut
-                                                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                                culpa qui officia deserunt mollit anim id est laborum.</p>
-                                            <br></br>
-                                            {/* catatan untuk About di bawah ini */}
-                                            <a href="https://theraphy/about/..." ><i>Penjelasan lengkap</i></a>
-                                        </Accordion.Body>
-                                    </Accordion.Item>
-                                </Accordion>
-                            </ListGroup.Item>
+                            {ListToApi.map(data => {
+                                return (
+                                    <ListGroup.Item key={data._id} className='m-0 p-0' style={{ height: "max-content" }} >
+                                        <Accordion style={{ width: "100%" }} >
+                                            <Accordion.Item eventKey="0" style={{ border: "0px solid black" }} >
+                                                <Accordion.Header><h5  >{data.title}</h5></Accordion.Header>
+                                                <Accordion.Body >
+                                                    <p>{data.body}</p>
+                                                    <br></br>
+                                                    {/* catatan untuk About di bawah ini */}
+                                                    <a href="https://theraphy/about/..." ><i>Penjelasan lengkap</i></a>
+                                                </Accordion.Body>
+                                            </Accordion.Item>
+                                        </Accordion>
+                                    </ListGroup.Item>
+                                )
+                            })}
 
-                            <ListGroup.Item className='m-0 p-0' style={{ height: "max-content" }} >
-                                <Accordion style={{ width: "100%" }} >
-                                    <Accordion.Item eventKey="0" style={{ border: "0px solid black" }} >
-                                        <Accordion.Header><h5 >asdsadasdas</h5></Accordion.Header>
-                                        <Accordion.Body >
 
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation  ullamco laboris nisi ut
-                                                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                                culpa qui officia deserunt mollit anim id est laborum.</p>
-                                            <br></br>
-                                            {/* catatan untuk About di bawah ini */}
-                                            <a href="https://theraphy/about/..." ><i>Penjelasan lengkap</i></a>
 
-                                        </Accordion.Body>
-                                    </Accordion.Item>
-                                </Accordion>
-                            </ListGroup.Item>
-                            <ListGroup.Item className='m-0 p-0' style={{ height: "max-content" }} >
-                                <Accordion style={{ width: "100%" }} >
-                                    <Accordion.Item eventKey="0" style={{ border: "0px solid black" }} >
-                                        <Accordion.Header><h5 >asdsadasdas</h5></Accordion.Header>
-                                        <Accordion.Body >
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis nostrud exercitation  ullamco laboris nisi ut
-                                                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                                culpa qui officia deserunt mollit anim id est laborum.</p>
-                                            <br></br>
-                                            {/* catatan untuk About di bawah ini */}
-                                            <a href="https://theraphy/about/..." ><i>Penjelasan lengkap</i></a>
-
-                                        </Accordion.Body>
-                                    </Accordion.Item>
-                                </Accordion>
-                            </ListGroup.Item>
                         </ListGroup>
                     </Col>
                 </Row>

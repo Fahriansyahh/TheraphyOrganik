@@ -3,4 +3,5 @@ import Products from "./Products/Products"
 import Admin from "./Admin/Admin";
 import Theraphy from "./Theraphy/Theraphy";
 import Order from "./Order/Order";
-export { Home, Products, Admin, Theraphy, Order }
+import PagesAdmin from "./PagesAdmin/PagesAdmin";
+export { Home, Products, Admin, Theraphy, Order, PagesAdmin }

@@ -63,7 +63,6 @@ const Home = () => {
 
         AOS.init();
         dispatch({ type: "Global", payload: "asdasdasda" })
-        console.log(Global)
     }, [dispatch, Global]);
     const Random = sessionStorage.getItem("random");
     const location = useLocation();

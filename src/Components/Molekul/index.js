@@ -5,4 +5,5 @@ import UpdateModal from "./Modal/UpdateModal";
 import Pesan from "./Pesan/Pesan"
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
-export { Navbarr, Footer, CreateModal, UpdateModal, Pesan, SignUp, SignIn }
+import NavbarAdmin from "./NavbarAdmin/NavbarAdmin";
+export { Navbarr, Footer, CreateModal, UpdateModal, Pesan, SignUp, SignIn, NavbarAdmin }

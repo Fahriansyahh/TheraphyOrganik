@@ -41,7 +41,7 @@ const Admin = () => {
                 sessionStorage.setItem("random", randomString);
                 const storedName = sessionStorage.getItem("random");
                 if (storedName) {
-                    history(`/Products/${storedName}`)
+                    history(`/AdminPages`)
                 }
             }
 
