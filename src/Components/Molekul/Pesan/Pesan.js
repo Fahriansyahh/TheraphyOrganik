@@ -127,13 +127,13 @@ const Pesan = () => {
                             />
                         </Form.Group>
                     </Row>
-                    <Row className="mb-3 d-flex justify-content-center align-items-lg-center" >
+                    <Row className="mb-3 d-flex justify-content-center align-items-lg-center " >
                         <Form.Group as={Col} md="12" controlId="validationCustom03">
-                            <Form.Label>Penjelasan Theraphy</Form.Label>
+                            <Form.Label className="mt-2">Penjelasan Theraphy</Form.Label>
                             <ListGroup style={{ height: "200px", overflow: "auto", boxShadow: "0px 0px 5px black" }} >
                                 {ListToApi.map(data => {
                                     return (
-                                        <ListGroup.Item key={data._id} className='m-0 p-0' style={{ height: "max-content" }} >
+                                        <ListGroup.Item key={data._id} className='m-0 p-0 List_thraphy_Pesan' style={{ height: "max-content" }} >
                                             <Accordion style={{ width: "100%" }} >
                                                 <Accordion.Item eventKey="0" style={{ border: "0px solid black" }} >
                                                     <Accordion.Header><h5  >{data.title}</h5></Accordion.Header>
