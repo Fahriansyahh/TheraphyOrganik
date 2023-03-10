@@ -76,7 +76,7 @@ const ListTheraphyCreate = () => {
                 }).then(() => {
                     toast('Create berhasil!');
                 }).catch(err => {
-                    toast('Server gagal Mengakses data');
+                    toast('Data Gagal di tambahkan');
                     console.log(err)
                 })
                 sessionStorage.removeItem("dataList")

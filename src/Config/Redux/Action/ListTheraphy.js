@@ -16,3 +16,16 @@ export const getByidToApiList = (selectedTheraphy) => {
         console.log(err)
     })
 }
+
+export const deleteToApi = (toast, a) => {
+    axios.delete(`http://localhost:4000/ListTheraphy/v1/deleted/${a}`).then((res) => {
+        const title = res.data.response.title
+        toast(`Theraphy ${title} telah di deleted`)
+        setTimeout(() => {
+            window.location.reload()
+        }, 1000);
+    }).catch(err => {
+        toast("data gagal di deleted")
+    })
+}
+
