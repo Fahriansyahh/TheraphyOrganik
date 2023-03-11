@@ -1,19 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Accordion from 'react-bootstrap/Accordion';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { ToastContainer, toast } from 'react-toastify';
-import axios from "axios"
+// import axios from "axios"
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { ModalUpdateList } from '../Atom';
 import { GetAllToApiList, deleteToApi } from '../../../Config/Redux/Action/ListTheraphy';
 import './GetListTheraphy.scss'
+//! GUNAKAN BY ID UNTUK MENGUPDATE DATA
 const GetListTheraphy = () => {
     const [setList, setListToApi] = useState([])
-    GetAllToApiList(setListToApi)
+    const [id, setId] = useState()
+    useEffect(() => {
 
+        GetAllToApiList(setListToApi)
+    }, [setListToApi])
 
     return (
         <Container className="Container_dataList">
@@ -32,8 +39,20 @@ const GetListTheraphy = () => {
                                     <Accordion.Body>
 
                                         <ListGroup variant="flush"  >
-                                            <ListGroup.Item>Title : {data.title}</ListGroup.Item>
-                                            <ListGroup.Item>Body : {data.body}</ListGroup.Item>
+                                            <ListGroup.Item style={{ overflow: "auto" }} >Title : {data.title}</ListGroup.Item>
+                                            <ListGroup.Item  >
+
+                                                <FloatingLabel controlId="floatingTextarea2" >
+                                                    <Form.Control
+                                                        as="textarea"
+                                                        defaultValue={data.body}
+                                                        placeholder="Leave a comment here"
+                                                        style={{
+                                                            height: '200px',
+                                                        }}
+                                                        readOnly />
+                                                </FloatingLabel>
+                                            </ListGroup.Item>
                                             <ListGroup.Item>
                                                 <Row>
                                                     <ListGroup.Item style={{ borderRadius: "10px", boxShadow: "-0px -0px 4px" }} >
@@ -48,7 +67,7 @@ const GetListTheraphy = () => {
                                                                                     <ListGroup.Item>
                                                                                         Deskripsi : {paket.deskripsi}
                                                                                     </ListGroup.Item>
-                                                                                    <ListGroup.Item>Harga : {paket.harga}</ListGroup.Item>
+                                                                                    <ListGroup.Item style={{ overflow: "auto" }}>Harga : {paket.harga}</ListGroup.Item>
                                                                                 </ListGroup>
                                                                             </Accordion.Body>
                                                                         </Accordion.Item>
@@ -62,7 +81,10 @@ const GetListTheraphy = () => {
                                                 </Row>
                                             </ListGroup.Item>
                                             <ListGroup.Item className="d-flex justify-content-end">
-                                                <Button variant="primary" className="me-2"  >Update</Button>{' '}
+                                                <div onClick={() => { setId(data._id) }} >
+                                                    <ModalUpdateList id={id} />
+                                                </div>
+
                                                 <ModalDeleted data={data._id} Titles={data.title} />
                                             </ListGroup.Item>
                                         </ListGroup>

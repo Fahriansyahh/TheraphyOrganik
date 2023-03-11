@@ -155,7 +155,7 @@ const ListTheraphyCreate = () => {
                                             <Form.Control
                                                 required
                                                 defaultValue={Object.deskripsi}
-                                                onChange={(a) => { Object.harga = a.target.value }} type="text" placeholder="Masukan harga" />
+                                                onChange={(a) => { Object.harga = a.target.value }} type="number" placeholder="Masukan harga" />
                                         </InputGroup.Text>
                                     </Form.Group>
 
