@@ -1,14 +1,10 @@
 import React from 'react'
-import { NavbarAdmin } from '../../Components/Molekul'
-import { ListTheraphyCreate, GetListTheraphy } from '../../Components/Atom/Atom'
+import {ComponentsPagesAdmin} from "../../Components/index"
 const PagesAdmin = () => {
     return (
         <>
-            <NavbarAdmin />
-            <ListTheraphyCreate />
-            <GetListTheraphy />
+<ComponentsPagesAdmin/>
         </>
-
     )
 }
 

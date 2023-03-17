@@ -5,5 +5,6 @@ import UpdateModal from "./Modal/UpdateModal";
 import Pesan from "./Pesan/Pesan"
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
-import NavbarAdmin from "./NavbarAdmin/NavbarAdmin";
-export { Navbarr, Footer, CreateModal, UpdateModal, Pesan, SignUp, SignIn, NavbarAdmin }
+import ComponentsPagesAdmin from "./ComponentsPagesAdmin/ComponentsPagesAdmin";
+import ListTheraphy from "./ListTheraphy/ListTheraphy";
+export { Navbarr, Footer, CreateModal, UpdateModal, Pesan, SignUp, SignIn, ComponentsPagesAdmin ,ListTheraphy}

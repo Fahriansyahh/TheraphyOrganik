@@ -3,11 +3,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Logo from "../../../Assets/image/Therapy_Organic.png"
-
-import "./NavbarAdmin.scss"
-const NavbarAdmin = () => {
+import "./ComponentsPagesAdmin.scss"
+import ListTheraphy from '../ListTheraphy/ListTheraphy';
+const ComponentsPagesAdmin = () => {
     return (
-        <Navbar bg="light" expand="lg">
+        <>
+                <Navbar bg="light" expand="lg">
             <Container className="Container_Admin_Nav d-flex align-items-center">
                 <Navbar.Brand className="d-flex align-items-center">
                     <img
@@ -32,8 +33,10 @@ const NavbarAdmin = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar >
+        <ListTheraphy/>
+</>
     )
 
 }
 
-export default NavbarAdmin
+export default ComponentsPagesAdmin
