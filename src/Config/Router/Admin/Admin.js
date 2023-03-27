@@ -5,7 +5,7 @@ const AdminRoutes = () => {
     return (
         <Routes>
             <Route path="/Products/:id" element={<Products />} />
-            <Route path="/AdminPages" element={<PagesAdmin />} />
+            <Route path="/AdminPages/:id" element={<PagesAdmin />} />
 
         </Routes>
     )

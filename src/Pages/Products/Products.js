@@ -92,7 +92,8 @@ const Products = () => {
     if (lastPartOfPath === Random || lastPartOfPath === "Products") {
         return (
             <div className='Products_Container' >
-                <Navbarr />
+
+                {Random ? false : <Navbarr />}
                 <Container style={{ marginTop: "20px", marginBottom: "100px" }}  >
 
                     <Row>
@@ -274,7 +275,7 @@ const Products = () => {
     } else {
         return (
             <div className='d-flex justify-content-center align-items-center' style={{ height: "100vh" }}>
-                <h1>404 not found</h1>
+                <h1>404 page not found</h1>
             </div>
         )
     }
