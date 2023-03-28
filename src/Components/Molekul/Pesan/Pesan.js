@@ -5,15 +5,22 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Accordion from 'react-bootstrap/Accordion';
+import Alert from 'react-bootstrap/Alert';
 import { GetAllToApiList } from '../../../Config/Redux/Action/ListTheraphy';
+import { PesananApi } from '../../../Config/Redux/Action/User';
 import "./Pesan.scss"
-
+import { ToastContainer, toast } from 'react-toastify';
 const Pesan = () => {
     const [validated, setValidated] = useState(false);
     const [ListToApi, setListToApi] = useState([])
     const [selectedTheraphy, setSelectedTheraphy] = useState("");
     const [Selected, HandleSelected] = useState([])
     const [dataList, setDataList] = useState()
+    const [dari, setDari] = useState()
+    const [sampai, setSampai] = useState()
+    const [komentar, setKomentar] = useState()
+    const [Error, setError] = useState()
+    const [checked, setchecked] = useState()
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -32,6 +39,22 @@ const Pesan = () => {
             setDataList(JSON.parse(event.target.value));
         }
     }
+    const handlePesan = () => {
+        if (selectedTheraphy && dataList && dari && sampai) {
+            if (selectedTheraphy !== "Pilihan") {
+                if (checked) {
+                    const data = { Theraphy: selectedTheraphy, Paket: dataList.PilihanPaket, Dari: dari, Sampai: sampai, Deskripsi: dataList.deskripsi, Harga: dataList.harga, Komentar: komentar }
+                    PesananApi(data, setError, toast)
+                } else {
+                    setError("Pastikan Persetujaan di bawah anda Ceklis")
+                }
+            } else {
+                setError("Pastikan Pilihan Theraphy Anda ")
+            }
+        } else {
+            setError("isi Pesanan Dengan Lengkap")
+        }
+    }
     useEffect(() => {
         GetAllToApiList(setListToApi)
         if (selectedTheraphy) {
@@ -45,6 +68,10 @@ const Pesan = () => {
     return (
         <Row className='d-flex justify-content-center align-items-sm-center mt-3 Order_contain ' >
             <Col xs={"12"} sm={"8"}  >
+                <ToastContainer />
+                {Error ? <Alert key={"warning"} variant={"warning"}>
+                    {Error}
+                </Alert> : false}
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <Row className="mb-3">
                         <Form.Group as={Col} md="6" xs="6" controlId="validationCustom01"  >
@@ -91,11 +118,16 @@ const Pesan = () => {
                     <Row className="mb-3 d-flex justify-content-sm-center justify-content-end" >
                         <Form.Group as={Col} md="4" xs="4" controlId="validationCustomUsername">
                             <Form.Label>Dari</Form.Label>
-                            <Form.Control type="date" placeholder="Harga" required style={{ boxShadow: "0px 0px 3px black" }} />
+                            <Form.Control type="date" placeholder="Harga" required style={{ boxShadow: "0px 0px 3px black" }} onChange={(a) => {
+                                setDari(a.target.value)
+                            }} />
                         </Form.Group>
                         <Form.Group as={Col} md="4" xs="4" controlId="validationCustomUsername">
                             <Form.Label>Sampai</Form.Label>
-                            <Form.Control type="date" placeholder="Harga" required style={{ boxShadow: "0px 0px 3px black" }} />
+                            <Form.Control type="date" placeholder="Harga" required style={{ boxShadow: "0px 0px 3px black" }}
+                                onChange={(a) => {
+                                    setSampai(a.target.value)
+                                }} />
                         </Form.Group>
                     </Row>
 
@@ -124,6 +156,9 @@ const Pesan = () => {
                                 as="textarea"
                                 placeholder="jika ada keinginan tambahan"
                                 style={{ height: '100px', boxShadow: "0px 0px 5px black" }}
+                                onChange={(a) => {
+                                    setKomentar(a.target.value)
+                                }}
                             />
                         </Form.Group>
                     </Row>
@@ -154,10 +189,15 @@ const Pesan = () => {
                     <Form.Group className="mb-3">
                         <Form.Check
                             required
-                            label="Theraphy ini Khusus  Wanita: Ya / Tidak"
+                            label="Apakah Anda Yakin Ya/Tidak"
+                            onChange={(a) => {
+                                setchecked(a.target.checked)
+                            }}
                         />
                     </Form.Group>
-                    <Button type="submit" className="btn_Order"  >Pesan Sekarang</Button>
+                    <Button className="btn_Order" onClick={() => {
+                        handlePesan()
+                    }} >Pesan Sekarang</Button>
                 </Form>
             </Col>
         </Row >

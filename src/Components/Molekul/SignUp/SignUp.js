@@ -6,9 +6,9 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import Alert from 'react-bootstrap/Alert';
 import "./signUp.scss"
-import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SignUpUserApi } from '../../../Config/Redux/Action/User';
 const SignUp = () => {
     const [validated, setValidated] = useState(false);
     const [FullName, setFullName] = useState()
@@ -18,6 +18,7 @@ const SignUp = () => {
     const [Alamat, setAlamat] = useState()
     const [errors, setErrors] = useState([])
     const [condition, setCondition] = useState(true)
+    const [checked, setChecked] = useState()
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -28,22 +29,10 @@ const SignUp = () => {
         setValidated(true);
     };
     const handleSignUP = () => {
-        const data = { FullName, Password, Email, NoHp, Alamat }
-
-        axios.post("http://localhost:4000/User/v1/Created", data, {
-            headers: {
-                "content-type": "multipart/form-data"
-            }
-        }).then(response => {
-            setCondition(true)
-            toast("akun anda berhasil di buat")
-            setTimeout(function () {
-                window.location.reload()
-            }, 1000)
-        }).catch(err => {
-            setErrors(err.response.data.data.err)
-            setCondition(false)
-        })
+        if (checked) {
+            const data = { FullName, Password, Email, NoHp, Alamat }
+            SignUpUserApi(data, setCondition, setErrors, toast)
+        }
     }
     return (
         <Row style={{ backgroundColor: "aliceblue", borderRadius: "0px 0px 20px 20px" }} className="mx-1 mt-1 py-3 SignUp ">
@@ -56,10 +45,13 @@ const SignUp = () => {
                         })}
                     </ul>
                 </Alert>}
+                {checked ? false : <Alert key={"warning"} variant={"warning"}>
+                    Theraphy ini Khusus Wanita Ceklis Jika Anda Seorang wanita
+                </Alert>}
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <Row className="mb-3">
                         <Form.Group as={Col} md="6" >
-                            <Form.Label>Full name</Form.Label>
+                            <Form.Label>Full name / Username</Form.Label>
                             <Form.Control
                                 style={{ boxShadow: "0px 0px 5px black" }}
                                 required
@@ -129,7 +121,10 @@ const SignUp = () => {
                     <Form.Group className="mb-3">
                         <Form.Check
                             required
-                            label="Theraphy ini Khusus  Wanita: Ya / Tidak"
+                            label="Apakah Anda seorang Wanita: Ya / Tidak"
+                            onChange={(a) => {
+                                setChecked(a.target.checked)
+                            }}
                         />
                     </Form.Group>
                     <div className='d-flex justify-content-end'  >

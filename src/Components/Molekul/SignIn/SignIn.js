@@ -8,27 +8,14 @@ import { motion } from "framer-motion"
 import "./SignIn.scss"
 import { ToastContainer, toast } from 'react-toastify';
 import Alert from 'react-bootstrap/Alert';
-import axios from 'axios';
+import { SignInUserApi } from '../../../Config/Redux/Action/User';
 const SignIn = () => {
     const [FullName, setFullName] = useState()
     const [Password, setPassword] = useState()
     const [condition, setCondition] = useState(true)
     const [value, setValue] = useState([])
     const handleSignIn = () => {
-        console.log(Password)
-        console.log(FullName)
-        axios.get(`http://localhost:4000/User/v1/Auth?FullName=${FullName}&Password=${Password}`).then(res => {
-            toast(`Hallo ${res.data.data.User.FullName} Anda Telah login`)
-            const id = res.data.data._id
-            localStorage.setItem('IdUser', `${id}`);
-            setCondition(true)
-            setTimeout(function () {
-                window.location.reload()
-            }, 2000)
-        }).catch(err => {
-            setValue(err.response.data.data.err)
-            setCondition(false)
-        })
+        SignInUserApi(FullName, Password, setCondition, setValue, toast)
     }
     return (
         <Row style={{ backgroundColor: "aliceblue", height: "70vh", borderRadius: "0px 0px 20px 20px", boxShadow: "0 0 10px black" }} className=" container_SignIn mt-3 " >
@@ -55,7 +42,7 @@ const SignIn = () => {
                 </motion.div>
                 <Form  >
                     <Form.Group className="mb-3 mx-auto" as={Col} xs="10" md="6" lg="4" controlId="formBasicEmail">
-                        <Form.Label>Full Name</Form.Label>
+                        <Form.Label>Full Name / Username</Form.Label>
                         <Form.Control type="text" placeholder="Full Name"
                             style={{ boxShadow: "0px 0px 5px black" }}
                             defaultValue={FullName}
@@ -75,9 +62,7 @@ const SignIn = () => {
                             }} />
 
                     </Form.Group>
-                    <Form.Group className="mb-3 mx-auto" as={Col} xs="10" md="6" lg="4" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
+
                     <div className="d-flex flex-column" >
                         <a className='mx-auto mb-2' href={'#id'}>Lupa Password</a>
                         <Button variant="primary" style={{ borderRadius: "30px", padding: "5px 20px", width: "max-content" }} className="Btn_SignIn mx-auto" onClick={() => {
