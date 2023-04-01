@@ -11,15 +11,23 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import logoUser from "../../../Assets/image/LogoUser.png"
 import { gsap } from 'gsap';
 import { motion } from "framer-motion"
-
 import "./CanvasUser.scss"
+import Alert from 'react-bootstrap/Alert';
+import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function CanvasUser() {
     const [show, setShow] = useState(false);
     const [edit, setEdit] = useState(true)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-
+    const [data, setData] = useState()
+    const [FullName, setFullName] = useState()
+    const [Email, setEmail] = useState()
+    const [NoHp, setNoHp] = useState()
+    const [Alamat, setAlamat] = useState()
+    const [Error, setError] = useState([])
+    const [check, setCheck] = useState(true)
     useEffect(() => {
         gsap.set('.img_user', {
             duration: 0, y: -110, opacity: 0
@@ -47,8 +55,37 @@ function CanvasUser() {
         gsap.to('.btn_Canvas', {
             duration: 0.3, y: 0, opacity: 1,
         });
+        const id = localStorage.getItem("IdUser")
+        axios.get(`http://localhost:4000/User/v1/GetById/${id}`).then(res => {
+            setData(res.data.data.User)
+        }).catch(err => {
+            console.log(err)
+        })
+    }, [setData])
 
-    })
+    const handleSubmit = () => {
+        const update = {}
+        update.FullName = FullName || data?.FullName
+        update.Email = Email || data?.Email
+        update.NoHp = NoHp || `0${data?.NoHp}`
+        update.Alamat = Alamat || data?.Alamat
+        const Id = localStorage.getItem("IdUser")
+        axios.put(`http://localhost:4000/User/v1/updateUser/${Id}`, update, {
+            headers: {
+                "content-type": "multipart/form-data"
+            }
+        }).then((res) => {
+            console.log(res)
+            toast("Update Berhasil !")
+            setCheck(true)
+        }).catch(err => {
+            setCheck(false)
+            console.log(err)
+            setError(err.response.data.data.err)
+        })
+
+    }
+
     return (
         <>
             <Col sm={"4"} xs={"2"} className="my-auto container_btnLogouser" >
@@ -86,7 +123,14 @@ function CanvasUser() {
                 <Offcanvas.Header closeButton>
                     ....
                 </Offcanvas.Header>
-
+                <ToastContainer />
+                {check ? false : <Alert key={"warning"} variant={"warning"}>
+                    <ul>
+                        {Error.map(a => {
+                            return (<li key={a?.msg}>{a?.msg}</li>)
+                        })}
+                    </ul>
+                </Alert>}
                 <Offcanvas.Body className='mt-5'>
                     <Container >
                         <Row >
@@ -106,49 +150,54 @@ function CanvasUser() {
 
                             </Col>
                             <Col xs="12" sm="8" lg="8" className="d-flex justify-content-center mx-auto" >
-                                <h2 className="mt-3 toRight">M.fahriansyah</h2>
+                                <h2 className="mt-3 toRight">{data?.FullName}</h2>
                             </Col>
                         </Row>
                         <Row className='mt-4' >
                             {edit ? <Col xs="12" sm="12">
                                 <ListGroup variant="flush">
-                                    <ListGroup.Item className="toRight" >nama: M.fahriansyah</ListGroup.Item>
-                                    <ListGroup.Item className="toLeft">Email: fahrumfahriansyah@gmail.com</ListGroup.Item>
-                                    <ListGroup.Item className="toRight">NoHp: 085710247164</ListGroup.Item>
-                                    <ListGroup.Item className="toLeft">Almat: kota tangerang selatan bintaro </ListGroup.Item>
+                                    <ListGroup.Item className="toRight" >nama: {data?.FullName}</ListGroup.Item>
+                                    <ListGroup.Item className="toLeft">Email: {data?.Email}</ListGroup.Item>
+                                    <ListGroup.Item className="toRight">NoHp: 0{data?.NoHp}</ListGroup.Item>
+                                    <ListGroup.Item className="toLeft">Alamat: {data?.Alamat} </ListGroup.Item>
                                 </ListGroup>
                             </Col> : <Col xs="12" sm="12">
                                 <Form>
                                     <Row>
                                         <Form.Group className="mb-1" as={Col} md="6" lg="5" >
                                             <Form.Label className='toRight'>Nama Lengkap</Form.Label>
-                                            <Form.Control type="text" placeholder="m.fahriansyah"
-                                                style={{ boxShadow: "0px 0px 5px black" }} />
+                                            <Form.Control type="text" defaultValue={FullName || data?.FullName}
+                                                style={{ boxShadow: "0px 0px 5px black" }} onChange={(a) => { setFullName(a.target.value) }} />
                                         </Form.Group>
                                         <Form.Group className="mb-1" as={Col} lg="4" md="6" >
                                             <Form.Label className='toLeft'>Email</Form.Label>
-                                            <Form.Control type="password" placeholder="Password"
+                                            <Form.Control type="email" defaultValue={Email || data?.Email}
                                                 style={{ boxShadow: "0px 0px 5px black" }}
+                                                onChange={(a) => { setEmail(a.target.value) }}
                                             />
 
                                         </Form.Group>
                                         <Form.Group className="mb-1" as={Col} md="3" lg="3" >
                                             <Form.Label className='toRight'>NoHp</Form.Label>
-                                            <Form.Control type="text" placeholder="085710247164"
+                                            <Form.Control type="number" defaultValue={NoHp || `0${data?.NoHp}`}
                                                 style={{ boxShadow: "0px 0px 5px black" }}
+                                                onChange={(a) => { setNoHp(a.target.value) }}
                                             />
                                         </Form.Group>
                                         <Form.Group as={Col} md="9" className="mx-auto" >
                                             <Form.Label className='toLeft'>Alamat</Form.Label>
                                             <Form.Control
                                                 as="textarea"
-                                                placeholder="masukan alamat lengkap anda"
+                                                defaultValue={Alamat || data?.Alamat}
+                                                onChange={(a) => { setAlamat(a.target.value) }}
                                                 style={{ height: '100px', boxShadow: "0px 0px 5px black" }}
                                             />
                                         </Form.Group>
                                         <div as={Col} md="12" className='d-flex justify-content-center'>
-                                            <Button variant="success" type="submit" style={{ width: "max-content", padding: "5px 20px", borderRadius: "30px", boxShadow: "0px 0px 5px black" }}
-                                                className="mt-5 btn_Canvas"  >
+                                            <Button variant="success" style={{ width: "max-content", padding: "5px 20px", borderRadius: "30px", boxShadow: "0px 0px 5px black" }}
+                                                className="mt-5 btn_Canvas" onClick={() => {
+                                                    handleSubmit()
+                                                }} >
                                                 Submit
                                             </Button>
                                         </div>
