@@ -1,0 +1,33 @@
+.containerPemasanan {
+    .ColPesan {
+        .CardsPemesanan {
+            font-family: Arial, Helvetica, sans-serif;
+
+            h1 {
+                font-size: 20px;
+            }
+
+            h2 {
+                font-size: 18px;
+
+            }
+
+            span {
+                font-size: 15px;
+
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .bgcPesan {
+                background-image: url(../../../Assets/image/footerModal.png);
+                background-size: cover;
+                background-position: 90px;
+
+                height: 50px;
+            }
+        }
+    }
+}

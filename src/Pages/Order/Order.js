@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Footer, Navbarr, Pesan, SignUp, SignIn, LogOutUser } from '../../Components'
+import { Footer, Navbarr, Pesan, SignUp, SignIn, LogOutUser, Pemesanan } from '../../Components'
 import { CanvasUser } from '../../Components/Atom/Atom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -14,6 +14,7 @@ const Order = () => {
     const [home, setHome] = useState(false)
     const [signIn, setSignIn] = useState(false)
     const [signUp, setSignUp] = useState(false)
+    const [pesan, setPesan] = useState(false)
     const [show, setShow] = useState(false);
     const target = useRef(null);
 
@@ -23,22 +24,30 @@ const Order = () => {
             setHome(true)
             setSignIn(false)
             setSignUp(false)
+            setPesan(false)
         }
         if ("SignIn" === seting) {
             setHome(false)
             setSignIn(true)
             setSignUp(false)
+            setPesan(false)
 
         }
         if ("SignUp" === seting) {
             setHome(false)
             setSignIn(false)
             setSignUp(true)
+            setPesan(false)
 
         }
         if ("pesanan" === seting) {
-            setShow(!show)
+            setHome(false)
+            setSignIn(false)
+            setSignUp(false)
+            setPesan(true)
+
         }
+        setShow(!show)
         setFirst(false)
     }
     const getId = localStorage.getItem('IdUser');
@@ -118,6 +127,8 @@ const Order = () => {
                 {first ? <Pesan /> : false}
                 {home ? <Pesan /> : false}
                 {signIn ? <SignIn /> : false}
+                {pesan ? <Pemesanan /> : false}
+
             </Container>
             <Footer />
         </div >

@@ -13,9 +13,9 @@ import { gsap } from 'gsap';
 import { motion } from "framer-motion"
 import "./CanvasUser.scss"
 import Alert from 'react-bootstrap/Alert';
-import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GetIdUserApi, UpdateUserApi } from '../../../Config/Redux/Action/User';
 function CanvasUser() {
     const [show, setShow] = useState(false);
     const [edit, setEdit] = useState(true)
@@ -55,12 +55,7 @@ function CanvasUser() {
         gsap.to('.btn_Canvas', {
             duration: 0.3, y: 0, opacity: 1,
         });
-        const id = localStorage.getItem("IdUser")
-        axios.get(`http://localhost:4000/User/v1/GetById/${id}`).then(res => {
-            setData(res.data.data.User)
-        }).catch(err => {
-            console.log(err)
-        })
+        GetIdUserApi(setData)
     }, [setData])
 
     const handleSubmit = () => {
@@ -69,21 +64,8 @@ function CanvasUser() {
         update.Email = Email || data?.Email
         update.NoHp = NoHp || `0${data?.NoHp}`
         update.Alamat = Alamat || data?.Alamat
-        const Id = localStorage.getItem("IdUser")
-        axios.put(`http://localhost:4000/User/v1/updateUser/${Id}`, update, {
-            headers: {
-                "content-type": "multipart/form-data"
-            }
-        }).then((res) => {
-            console.log(res)
-            toast("Update Berhasil !")
-            setCheck(true)
-        }).catch(err => {
-            setCheck(false)
-            console.log(err)
-            setError(err.response.data.data.err)
-        })
 
+        UpdateUserApi(update, setCheck, setError, toast)
     }
 
     return (

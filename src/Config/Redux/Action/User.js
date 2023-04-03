@@ -45,3 +45,29 @@ export const PesananApi = (data, setError, toast) => {
         console.log(err)
     })
 }
+
+export const GetIdUserApi = (setData) => {
+    const id = localStorage.getItem("IdUser")
+    axios.get(`http://localhost:4000/User/v1/GetById/${id}`).then(res => {
+        setData(res.data.data.User)
+    }).catch(err => {
+        console.log(err)
+    })
+}
+
+export const UpdateUserApi = (update, setCheck, setError, toast) => {
+    const Id = localStorage.getItem("IdUser")
+    axios.put(`http://localhost:4000/User/v1/updateUser/${Id}`, update, {
+        headers: {
+            "content-type": "multipart/form-data"
+        }
+    }).then((res) => {
+        toast("Update Berhasil !")
+        setCheck(true)
+    }).catch(err => {
+        setCheck(false)
+        console.log(err)
+        setError(err.response.data.data.err)
+    })
+
+}
