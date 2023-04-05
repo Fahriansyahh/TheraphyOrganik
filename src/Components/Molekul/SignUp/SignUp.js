@@ -35,7 +35,7 @@ const SignUp = () => {
         }
     }
     return (
-        <Row style={{ backgroundColor: "aliceblue", borderRadius: "0px 0px 20px 20px" }} className="mx-1 mt-1 py-3 SignUp ">
+        <Row style={{ backgroundColor: "aliceblue", borderRadius: "0px 0px 20px 20px",boxShadow: "0 0 10px black" }} className="mx-0 mt-3 py-3  SignUp ">
             <Col xs={"12"} sm={"12"} lg={"8"} className="mx-auto"  >
                 <ToastContainer />
                 {condition ? false : <Alert key={"warning"} variant={"warning"}>

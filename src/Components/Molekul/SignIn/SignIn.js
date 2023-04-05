@@ -9,13 +9,18 @@ import "./SignIn.scss"
 import { ToastContainer, toast } from 'react-toastify';
 import Alert from 'react-bootstrap/Alert';
 import { SignInUserApi } from '../../../Config/Redux/Action/User';
+import { useNavigate } from 'react-router-dom';
 const SignIn = () => {
+    const history = useNavigate()
     const [FullName, setFullName] = useState()
     const [Password, setPassword] = useState()
     const [condition, setCondition] = useState(true)
     const [value, setValue] = useState([])
     const handleSignIn = () => {
         SignInUserApi(FullName, Password, setCondition, setValue, toast)
+    }
+    const handleKeyPassword=()=>{
+history("/Theraphy/OrderNow/KeyGmail")
     }
     return (
         <Row style={{ backgroundColor: "aliceblue", height: "70vh", borderRadius: "0px 0px 20px 20px", boxShadow: "0 0 10px black" }} className=" container_SignIn mt-3 " >
@@ -64,7 +69,7 @@ const SignIn = () => {
                     </Form.Group>
 
                     <div className="d-flex flex-column" >
-                        <a className='mx-auto mb-2' href={'#id'}>Lupa Password</a>
+                        <button className='mx-auto mb-2' onClick={()=>handleKeyPassword()} style={{backgroundColor: 'transparent', border: 'none',color:"blue"}}>Lupa Password</button>
                         <Button variant="primary" style={{ borderRadius: "30px", padding: "5px 20px", width: "max-content" }} className="Btn_SignIn mx-auto" onClick={() => {
                             handleSignIn()
                         }} >
