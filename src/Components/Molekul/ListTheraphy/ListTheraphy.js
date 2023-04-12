@@ -1,12 +1,12 @@
-import React from 'react'
-import { ListTheraphyCreate,GetListTheraphy } from '../../Atom/Atom'
+import React from "react";
+import { ListTheraphyCreate, GetListTheraphy } from "../../Atom/Atom";
 const ListTheraphy = () => {
   return (
-<>
-<ListTheraphyCreate />
-            <GetListTheraphy />
-</>
-    )
-}
+    <>
+      <ListTheraphyCreate />
+      <GetListTheraphy />
+    </>
+  );
+};
 
-export default ListTheraphy
+export default ListTheraphy;
