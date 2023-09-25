@@ -5,11 +5,11 @@ Proyek kecantikan untuk penjualan produk perawatan kulit menggunakan React.
 ## Versi Node.js
 Versi 16
 
-## Instalasi
+## npm run i
 Untuk menginstal semua paket yang diperlukan, jalankan perintah berikut:
 
 
-## Memulai Aplikasi
+## npm run start
 
 Jalankan aplikasi dalam mode pengembangan. Buka [http://localhost:3000](http://localhost:3000) di browser Anda untuk melihatnya.
 
