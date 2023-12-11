@@ -1,5 +1,5 @@
-import { Provider } from 'react-redux';
-import { Index, store } from '../Config';
+import { Provider } from "react-redux";
+import { Index, store } from "../Config";
 function App() {
   return (
     <Provider store={store}>
