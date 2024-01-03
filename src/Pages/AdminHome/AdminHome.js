@@ -19,7 +19,12 @@ const AdminHome = () => {
 
   useEffect(() => {
     axios
-      .get(`${"http://localhost:4000/User/v1/GetPages?page=" + currentPage}`)
+      .get(
+        `${
+          "https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/GetPages?page=" +
+          currentPage
+        }`
+      )
       .then((res) => {
         setData(res.data.response);
         setTotalPages(res.data.totalPages);
@@ -34,8 +39,10 @@ const AdminHome = () => {
       .get(
         `${
           valueSearch
-            ? "http://localhost:4000/User/v1/Search?q=" + value
-            : "http://localhost:4000/User/v1/GetPages?page=" + page
+            ? "https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/Search?q=" +
+              value
+            : "https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/GetPages?page=" +
+              page
         }`
       )
       .then((res) => {

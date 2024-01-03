@@ -46,7 +46,10 @@ const Footer = () => {
                   </a>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">
+                  <a
+                    href="https://shopee.co.id/fahrian413"
+                    className="text-reset"
+                  >
                     Shoppe
                   </a>
                 </p>

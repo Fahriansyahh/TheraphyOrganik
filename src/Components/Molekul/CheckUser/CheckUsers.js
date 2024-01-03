@@ -13,7 +13,9 @@ const CheckUsers = () => {
   const found = pathParts.includes(value);
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/User/v1/GetById/${lastPath}`)
+      .get(
+        `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/GetById/${lastPath}`
+      )
       .then((res) => {
         setData(res.data.data.User);
       })

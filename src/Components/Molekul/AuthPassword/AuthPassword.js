@@ -22,11 +22,15 @@ const AuthPassword = () => {
   const handleAuthGmail = () => {
     const data = { Email };
     axios
-      .put(`http://localhost:4000/User/v1/KeyPassword`, data, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      })
+      .put(
+        `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/KeyPassword`,
+        data,
+        {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
 

@@ -9,7 +9,7 @@ export const SignInUserApi = (
 ) => {
   axios
     .get(
-      `http://localhost:4000/User/v1/Auth?FullName=${FullName}&Password=${Password}`
+      `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/Auth?FullName=${FullName}&Password=${Password}`
     )
     .then((res) => {
       toast(`Hallo ${res.data.data.User.FullName} Anda Telah login`);
@@ -27,11 +27,15 @@ export const SignInUserApi = (
 };
 export const SignUpUserApi = (data, setCondition, setErrors, toast) => {
   axios
-    .post("http://localhost:4000/User/v1/Created", data, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    })
+    .post(
+      "https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/Created",
+      data,
+      {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      }
+    )
     .then((response) => {
       setCondition(true);
       toast("akun anda berhasil di buat");
@@ -48,11 +52,15 @@ export const SignUpUserApi = (data, setCondition, setErrors, toast) => {
 export const PesananApi = (data, setError, toast) => {
   const Id = localStorage.getItem("IdUser");
   axios
-    .put(`http://localhost:4000/User/v1/updatePesan/${Id}`, data, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    })
+    .put(
+      `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/updatePesan/${Id}`,
+      data,
+      {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      }
+    )
     .then(() => {
       setError(false);
       toast(
@@ -68,7 +76,9 @@ export const PesananApi = (data, setError, toast) => {
 export const GetIdUserApi = (setData) => {
   const id = localStorage.getItem("IdUser");
   axios
-    .get(`http://localhost:4000/User/v1/GetById/${id}`)
+    .get(
+      `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/GetById/${id}`
+    )
     .then((res) => {
       setData(res.data.data.User);
     })
@@ -80,11 +90,15 @@ export const GetIdUserApi = (setData) => {
 export const UpdateUserApi = (update, setCheck, setError, toast) => {
   const Id = localStorage.getItem("IdUser");
   axios
-    .put(`http://localhost:4000/User/v1/updateUser/${Id}`, update, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    })
+    .put(
+      `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/updateUser/${Id}`,
+      update,
+      {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      }
+    )
     .then((res) => {
       toast("Update Berhasil !");
       setCheck(true);
@@ -98,7 +112,9 @@ export const UpdateUserApi = (update, setCheck, setError, toast) => {
 
 export const deleteId = (id) => {
   axios
-    .delete(`http://localhost:4000/User/v1/DeleteById/${id}`)
+    .delete(
+      `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/DeleteById/${id}`
+    )
     .then((res) => {
       window.location.reload();
     })

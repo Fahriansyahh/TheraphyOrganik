@@ -1,7 +1,9 @@
 import axios from "axios";
 export const ApiProductsGetQuery = (queryPage, setPageNum, setProject) => {
   axios
-    .get(`http://localhost:4000/Products/v1/getAll?page=${queryPage}&toPage=10`)
+    .get(
+      `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/Products/v1/getAll?page=${queryPage}&toPage=10`
+    )
     .then((res) => {
       const data = res.data;
       setPageNum(data.pageNum);
@@ -11,7 +13,9 @@ export const ApiProductsGetQuery = (queryPage, setPageNum, setProject) => {
 };
 export const ApiProductsGetId = (id, setModal) => {
   axios
-    .get(`http://localhost:4000/Products/v1/getByid/${id}`)
+    .get(
+      `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/Products/v1/getByid/${id}`
+    )
     .then((res) => {
       const dataModal = res.data.Products.Products;
       setModal(dataModal);
@@ -23,7 +27,9 @@ export const ApiProductsGetId = (id, setModal) => {
 
 export const ApiKategory = (setKategory) => {
   axios
-    .get("http://localhost:4000/Products/v1/KategoryAll")
+    .get(
+      "https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/Products/v1/KategoryAll"
+    )
     .then((res) => {
       const data = res.data.data;
       setKategory(data);
@@ -41,7 +47,7 @@ export const ApiKategoryGet = (
 ) => {
   axios
     .get(
-      `http://localhost:4000/Products/v1/kategory/${KategoryId}?page=${queryPage}&toPage=10`
+      `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/Products/v1/kategory/${KategoryId}?page=${queryPage}&toPage=10`
     )
     .then((res) => {
       const data = res.data;

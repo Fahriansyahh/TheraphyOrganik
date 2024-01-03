@@ -34,11 +34,15 @@ const ReplacePassword = () => {
     const Email = sessionStorage.getItem("email");
     const data = { Key, FullName, Email, Password };
     axios
-      .put(`http://localhost:4000/User/v1/NewAcount`, data, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      })
+      .put(
+        `https://d4608642-6ba1-4fc1-b625-fc9fc8fcd476-00-qmjm9kj9xpab.picard.replit.dev/User/v1/NewAcount`,
+        data,
+        {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         history("/Theraphy/OrderNow");
         sessionStorage.removeItem("email");
