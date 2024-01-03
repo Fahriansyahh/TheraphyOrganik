@@ -40,7 +40,7 @@ const Admin = () => {
   const AdminValue = () => {
     if (Username === "Admin") {
       setError("pasword salah");
-      if (password === "AdminAdmin") {
+      if (password === "Admin4321") {
         setError(false);
         const randomString = generateRandomAlphaNumeric(
           Math.floor(Math.random() * (30 - 20 + 1)) + 20
