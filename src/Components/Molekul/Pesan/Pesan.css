@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Nanum+Brush+Script&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap");
+.Order_contain {
+  background-color: aliceblue;
+  padding: 20px 0px;
+  border-radius: 0px 0px 10px 10px;
+  box-shadow: 0px 0px 10px black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.Order_contain .formSelect {
+  box-shadow: 0px 0px 5px black;
+  font-size: 14px;
+}
+.Order_contain h5 {
+  font-size: 16px;
+}
+.Order_contain .List_thraphy_Pesan {
+  font-family: Merriweather;
+}
+.Order_contain .btn_Order {
+  float: right;
+  padding: 5px 20px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 5px black;
+  width: -moz-max-content;
+  width: max-content;
+}
+.Order_contain .btn_Order:hover {
+  box-shadow: 0px 4px 8px black;
+  font-size: 16px;
+}/*# sourceMappingURL=Pesan.css.map */

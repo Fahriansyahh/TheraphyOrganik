@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap");
+.Container_dataList h2 {
+  font-family: Roboto;
+  font-size: 26px;
+  text-align: start;
+  font-style: italic;
+}
+.Container_dataList .Acordian_Public {
+  font-family: Merriweather;
+  font-size: 16px;
+}
+.Container_dataList .Acordian_Public button {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.Container_dataList .Acordion_Circle {
+  font-size: 15px;
+}/*# sourceMappingURL=GetListTheraphy.css.map */

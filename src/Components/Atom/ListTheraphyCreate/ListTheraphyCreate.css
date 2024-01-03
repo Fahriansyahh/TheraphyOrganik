@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap");
+.container_listTheraphy {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+.container_listTheraphy h2 {
+  font-family: Roboto;
+  font-size: 26px;
+  text-align: start;
+  font-style: italic;
+}
+.container_listTheraphy h3 {
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 24px;
+}
+.container_listTheraphy button {
+  font-family: Lato;
+}/*# sourceMappingURL=ListTheraphyCreate.css.map */

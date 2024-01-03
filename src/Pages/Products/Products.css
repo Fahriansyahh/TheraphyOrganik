@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap");
+.Products_Container .link_products {
+  font-family: Roboto;
+}
+.Products_Container .cards_Products {
+  font-family: Lato;
+}
+.Products_Container .cards_Products .card_title {
+  font-size: 16px;
+  text-align: start;
+}
+.Products_Container .cards_Products .card_Money {
+  font-size: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: end;
+}
+
+.modal_footer {
+  width: 100%;
+  background-image: url(../../Assets/image/footerModal.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -40px;
+}/*# sourceMappingURL=Products.css.map */

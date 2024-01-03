@@ -1,0 +1,21 @@
+.containerPemasanan .ColPesan .CardsPemesanan {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.containerPemasanan .ColPesan .CardsPemesanan h1 {
+  font-size: 20px;
+}
+.containerPemasanan .ColPesan .CardsPemesanan h2 {
+  font-size: 18px;
+}
+.containerPemasanan .ColPesan .CardsPemesanan span {
+  font-size: 15px;
+}
+.containerPemasanan .ColPesan .CardsPemesanan p {
+  font-size: 14px;
+}
+.containerPemasanan .ColPesan .CardsPemesanan .bgcPesan {
+  background-image: url(../../../Assets/image/footerModal.png);
+  background-size: cover;
+  background-position: 90px;
+  height: 50px;
+}/*# sourceMappingURL=Pemesanan.css.map */

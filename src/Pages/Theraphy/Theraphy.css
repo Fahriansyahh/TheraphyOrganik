@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Nanum+Brush+Script&family=Roboto:ital,wght@0,100;0,300;1,100;1,300;1,400&display=swap");
+.container_Theraphy .Theraphy_About {
+  font-family: Roboto;
+}
+.container_Theraphy .Theraphy_About button {
+  border: 0px solid white;
+  transition: 0.4s;
+  margin: 0px 10px;
+  box-shadow: 0px 0px 5px black;
+  padding: 5px 20px;
+  border-radius: 30px;
+}
+.container_Theraphy .Theraphy_About button:hover {
+  box-shadow: 0px 4px 5px black;
+  transform: scale(1.2);
+}
+.container_Theraphy .Theraphy_About p {
+  font-size: 15px;
+  font-family: Merriweather;
+  font-weight: 500;
+}
+.container_Theraphy .Theraphy_About h1 {
+  font-family: Dancing Script;
+  font-size: 120px;
+  font-weight: bold;
+}
+.container_Theraphy .Theraphy_About h1 span:nth-child(even) {
+  background: -webkit-linear-gradient(right, green, yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.container_Theraphy .Theraphy_About h1 span:nth-child(odd) {
+  background: -webkit-linear-gradient(left, green, yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.container_Theraphy .list_theraphy {
+  font-family: Roboto;
+}
+.container_Theraphy .list_theraphy h3 {
+  font-family: Lato;
+  font-size: 1.4rem;
+  font-family: Merriweather;
+}
+.container_Theraphy .list_theraphy .listGroup_theraphy {
+  box-shadow: 0px 0px 4px black;
+  border-radius: 10px;
+}
+.container_Theraphy .list_theraphy .listGroup_theraphy h5 {
+  font-family: Merriweather;
+  font-size: 16px;
+}
+.container_Theraphy .list_theraphy .listGroup_theraphy p {
+  font-family: Merriweather;
+  font-size: 14px;
+}
+.container_Theraphy .list_theraphy .listGroup_theraphy a {
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 768px) {
+  .container_Theraphy .Theraphy_About h1 {
+    text-align: center;
+    font-family: Dancing Script;
+    font-size: 80px;
+    font-weight: bold;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .container_Theraphy .Theraphy_About h1 {
+    text-align: center;
+    font-family: Dancing Script;
+    font-size: 90px;
+    font-weight: bold;
+  }
+}/*# sourceMappingURL=Theraphy.css.map */
