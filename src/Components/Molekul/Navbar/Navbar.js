@@ -78,14 +78,6 @@ const Navbarr = (position) => {
             >
               Theraphy
             </Nav.Link>
-            <Nav.Link
-              className="text_Nav"
-              onClick={() => {
-                history("/Admin");
-              }}
-            >
-              Admin
-            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
