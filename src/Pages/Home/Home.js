@@ -45,7 +45,7 @@ const Home = () => {
     },
   };
   const textAnimate =
-    "Sesuaikan pilihan Anda sesuai dengan Keinginan Anda. Tombol 'Products' akan membawamu ke produk-produk jamu dan alat kecantikan kami, sedangkan tombol 'Theraphy Organic' akan membawamu ke jasa kami.";
+    "Sesuaikan pilihan  anda yang  tepat .untuk kebutuhan anda. Tombol products penyediaan  herbal dan bengkung tombol theraphy organik pelayanan jasa  health & beauty care";
 
   const textArray = textAnimate.split("");
   useEffect(() => {
